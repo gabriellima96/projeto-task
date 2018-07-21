@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-		<title>Add Task</title>
+		<title>Task</title>
 		
 		<link rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
@@ -24,10 +24,12 @@
 								<div class="field">
 									<label class="label" th:for="title">Title</label> 
 									<input id="title" th:field="*{title}" name="title" class="input" type="text" placeholder="Enter task title">
+									<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="help is-danger"></span>
 								</div>
 								<div class="field">
 									<label class="label" th:for="description">Description</label> 
 									<input id="description" th:field="*{description}" name="description" class="input" type="text" placeholder="Describe the task">
+									<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="help is-danger"></span>
 								</div>
 								<div class="field">
 									<input class="button is-primary" type="Submit" value="Save">

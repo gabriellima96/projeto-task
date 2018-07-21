@@ -43,9 +43,7 @@ public class TaskController {
 	@PostMapping(value = "/add")
 	public ModelAndView addTask(@Valid Task task, BindingResult result, RedirectAttributes redirect) {
 		if (result.hasErrors()) {
-			ModelAndView model = new ModelAndView("addOrUpdate");
-			model.addObject("title", "Add task");
-			return model;
+			return new ModelAndView("addOrUpdate").addObject("title", "Add task");
 		}
 		
 		service.save(task);
@@ -60,25 +58,22 @@ public class TaskController {
 		return "redirect:/";
 	}
 	
-	@PostMapping(value = "/update")
-	public ModelAndView updateTask(@Valid Task task, BindingResult result, RedirectAttributes redirect) {
-		if (result.hasErrors()) {
-			ModelAndView model = new ModelAndView("addOrUpdate");
-			model.addObject("title", "Task Update");
-			return model;
-
-		}
-		
-		service.update(task);
-		redirect.addFlashAttribute("notification", "Task updated!");
-		return new ModelAndView("redirect:/");
-	}
-	
 	@GetMapping(value = "/update/{id}")
 	public String updateTask(@PathVariable("id") Integer id, Model model) {
 		Task task = service.find(id);
 		model.addAttribute("task", task);
 		model.addAttribute("title", "Task Update");
 		return "addOrUpdate";
+	}
+	
+	@PostMapping(value = "/update")
+	public ModelAndView updateTask(@Valid Task task, BindingResult result, RedirectAttributes redirect) {
+		if (result.hasErrors()) {
+			return new ModelAndView("addOrUpdate").addObject("title", "Task Update");
+		}
+		
+		service.update(task);
+		redirect.addFlashAttribute("notification", "Task updated!");
+		return new ModelAndView("redirect:/");
 	}
 }
