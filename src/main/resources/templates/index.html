@@ -44,7 +44,7 @@
 										<td th:text="${ task.title }"></td>
 										<td th:text="${ task.description }"></td>
 										<td>
-											<a> 
+											<a th:href="@{/update/{id}(id=${task.id})}"> 
 												<span class="icon"><i class="fa fa-edit"></i></span>
 											</a> 
 											<a th:href="@{/delete/{id}(id=${task.id})}"> 

@@ -35,14 +35,17 @@ public class TaskController {
 	}
 	
 	@GetMapping(value = "/add")
-	public String addTask(Task task) {
+	public String addTask(Task task, Model model) {
+		model.addAttribute("title", "Add task");
 		return "addOrUpdate";
 	}
 	
 	@PostMapping(value = "/add")
 	public ModelAndView addTask(@Valid Task task, BindingResult result, RedirectAttributes redirect) {
 		if (result.hasErrors()) {
-			return new ModelAndView("/add");
+			ModelAndView model = new ModelAndView("addOrUpdate");
+			model.addObject("title", "Add task");
+			return model;
 		}
 		
 		service.save(task);
@@ -55,5 +58,27 @@ public class TaskController {
 		service.delete(id);
 		redirect.addFlashAttribute("notification", "Task deleted!");
 		return "redirect:/";
+	}
+	
+	@PostMapping(value = "/update")
+	public ModelAndView updateTask(@Valid Task task, BindingResult result, RedirectAttributes redirect) {
+		if (result.hasErrors()) {
+			ModelAndView model = new ModelAndView("addOrUpdate");
+			model.addObject("title", "Task Update");
+			return model;
+
+		}
+		
+		service.update(task);
+		redirect.addFlashAttribute("notification", "Task updated!");
+		return new ModelAndView("redirect:/");
+	}
+	
+	@GetMapping(value = "/update/{id}")
+	public String updateTask(@PathVariable("id") Integer id, Model model) {
+		Task task = service.find(id);
+		model.addAttribute("task", task);
+		model.addAttribute("title", "Task Update");
+		return "addOrUpdate";
 	}
 }

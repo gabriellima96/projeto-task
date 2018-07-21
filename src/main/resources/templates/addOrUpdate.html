@@ -17,9 +17,10 @@
 				<div class="columns">
 					<div class="column is-8 is-offset-2">
 						<div class="box">
-							<h1 class="title">Add Task</h1>
+							<h1 class="title" th:text="${title}"></h1>
 	
-							<form th:action="@{/add}" th:object="${task}" method="POST">
+							<form th:action="${task.id == null} ? @{/add} : @{/update}" th:object="${task}" method="POST">
+								<input type="hidden" th:field="*{id}"/>
 								<div class="field">
 									<label class="label" th:for="title">Title</label> 
 									<input id="title" th:field="*{title}" name="title" class="input" type="text" placeholder="Enter task title">
