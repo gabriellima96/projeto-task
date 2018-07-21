@@ -39,10 +39,10 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Fazer o CRUD</td>
-										<td>Criar um CRUD de task</td>
+									<tr th:if="${tasks}" th:each="task : ${ tasks }">
+										<td th:text="${ task.id }"></td>
+										<td th:text="${ task.title }"></td>
+										<td th:text="${ task.description }"></td>
 										<td>
 											<a> 
 												<span class="icon"><i class="fa fa-edit"></i></span>
@@ -52,7 +52,7 @@
 											</a>
 										</td>
 									</tr>
-									<tr>
+									<tr th:unless="${tasks}">
 										<td colspan="4" class="has-text-centered"> 
 											No task created yet!
 										</td>
