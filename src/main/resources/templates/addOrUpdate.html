@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+		<title>Add Task</title>
+		
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<section class="section">
+			<div class="container">
+				<div class="columns">
+					<div class="column is-8 is-offset-2">
+						<div class="box">
+							<h1 class="title">Add Task</h1>
+	
+							<form method="post">
+								<div class="field">
+									<label class="label">Title</label> 
+									<input id="title" name="title" class="input" type="text" placeholder="Enter task title">
+								</div>
+								<div class="field">
+									<label class="label">Description</label> 
+									<input id="description" name="description" class="input" type="text" placeholder="Describe the task">
+								</div>
+								<div class="field">
+									<input class="button is-primary" type="Submit" value="Save">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
