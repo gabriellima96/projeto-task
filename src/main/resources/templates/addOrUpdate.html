@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br" xmlns:th="www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,14 +19,14 @@
 						<div class="box">
 							<h1 class="title">Add Task</h1>
 	
-							<form method="post">
+							<form th:action="@{/add}" th:object="${task}" method="POST">
 								<div class="field">
-									<label class="label">Title</label> 
-									<input id="title" name="title" class="input" type="text" placeholder="Enter task title">
+									<label class="label" th:for="title">Title</label> 
+									<input id="title" th:field="*{title}" name="title" class="input" type="text" placeholder="Enter task title">
 								</div>
 								<div class="field">
-									<label class="label">Description</label> 
-									<input id="description" name="description" class="input" type="text" placeholder="Describe the task">
+									<label class="label" th:for="description">Description</label> 
+									<input id="description" th:field="*{description}" name="description" class="input" type="text" placeholder="Describe the task">
 								</div>
 								<div class="field">
 									<input class="button is-primary" type="Submit" value="Save">
