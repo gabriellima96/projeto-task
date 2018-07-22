@@ -16,21 +16,23 @@
 ```Shell
 git clone https://github.com/gabriellima96/projeto-task.git
 ```
-3- Altere o usuario e senha do Mysql
-```Abra o arquivo application.properties Em:
+
+2- Adicione seu usuario e senha do MySQL no arquivo **application.properties** em:
+```
 projeto-task/src/main/resources/application.properties
 ```
-2- Build - Dentro da pasta do projeto execute:
+
+3- Build - Dentro da pasta do projeto execute:
 ```Shell
 mvn clean install
 ```
 
-3- Run
+4- Run
 ```Shell
 mvn exec:java -X -Dexec.mainClass="site.gabriellima.projetotask.ProjetoTaskApplication" -Ddetail=true
 ```
 
-4- Acesse a página inicial em **http://localhost:8080/**
+5- Acesse a página inicial em **http://localhost:8080/**
 
 #### Screenshots
 
