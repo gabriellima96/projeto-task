@@ -19,7 +19,12 @@ import site.gabriellima.projetotask.service.TaskService;
 
 @Controller
 public class TaskController {
-	
+
+	private static final String ATTRIBUTE_TITLE = "title";
+	private static final String ATTRIBUTE_NOTIFICATION = "notification";
+	private static final String PAGE_ADD_OR_UPDATE = "addOrUpdate";
+	private static final String REDIRECT_ROOT = "redirect:/";
+
 	@Autowired
 	private TaskService service;
 	
@@ -27,7 +32,7 @@ public class TaskController {
 	public String index(Model model	) {
 		List<Task> tasks = service.findAll();
 
-		if (tasks.size() == 0) {
+		if (tasks.isEmpty()) {
 			tasks = null;
 		}
 		model.addAttribute("tasks", tasks);
@@ -36,44 +41,44 @@ public class TaskController {
 	
 	@GetMapping(value = "/add")
 	public String addTask(Task task, Model model) {
-		model.addAttribute("title", "Add task");
-		return "addOrUpdate";
+		model.addAttribute(ATTRIBUTE_TITLE, "Add task");
+		return PAGE_ADD_OR_UPDATE;
 	}
 	
 	@PostMapping(value = "/add")
 	public ModelAndView addTask(@Valid Task task, BindingResult result, RedirectAttributes redirect) {
 		if (result.hasErrors()) {
-			return new ModelAndView("addOrUpdate").addObject("title", "Add task");
+			return new ModelAndView(PAGE_ADD_OR_UPDATE).addObject(ATTRIBUTE_TITLE, "Add task");
 		}
 		
 		service.save(task);
-		redirect.addFlashAttribute("notification", "Task added!");
-		return new ModelAndView("redirect:/");
+		redirect.addFlashAttribute(ATTRIBUTE_NOTIFICATION, "Task added!");
+		return new ModelAndView(REDIRECT_ROOT);
 	}
 	
 	@GetMapping(value = "/delete/{id}")
 	public String deleteTask(@PathVariable("id") Integer id, RedirectAttributes redirect) {
 		service.delete(id);
-		redirect.addFlashAttribute("notification", "Task deleted!");
-		return "redirect:/";
+		redirect.addFlashAttribute(ATTRIBUTE_NOTIFICATION, "Task deleted!");
+		return REDIRECT_ROOT;
 	}
 	
 	@GetMapping(value = "/update/{id}")
 	public String updateTask(@PathVariable("id") Integer id, Model model) {
 		Task task = service.find(id);
 		model.addAttribute("task", task);
-		model.addAttribute("title", "Task Update");
-		return "addOrUpdate";
+		model.addAttribute(ATTRIBUTE_TITLE, "Task Update");
+		return PAGE_ADD_OR_UPDATE;
 	}
 	
 	@PostMapping(value = "/update")
 	public ModelAndView updateTask(@Valid Task task, BindingResult result, RedirectAttributes redirect) {
 		if (result.hasErrors()) {
-			return new ModelAndView("addOrUpdate").addObject("title", "Task Update");
+			return new ModelAndView(PAGE_ADD_OR_UPDATE).addObject(ATTRIBUTE_TITLE, "Task Update");
 		}
 		
 		service.update(task);
-		redirect.addFlashAttribute("notification", "Task updated!");
-		return new ModelAndView("redirect:/");
+		redirect.addFlashAttribute(ATTRIBUTE_NOTIFICATION, "Task updated!");
+		return new ModelAndView(REDIRECT_ROOT);
 	}
 }

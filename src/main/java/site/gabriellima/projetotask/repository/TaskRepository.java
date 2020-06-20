@@ -7,5 +7,5 @@ import site.gabriellima.projetotask.model.Task;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
-	public Task findOneById(Integer id);
+	Task findOneById(Integer id);
 }
