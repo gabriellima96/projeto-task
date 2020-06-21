@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  app-mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=dbTask
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+    ports:
+    - 3306:3306
+  app-main:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: projeto-task:latest
+    restart: on-failure
+    depends_on:
+      - app-mysql
+    ports:
+    - 8080:8080
+    environment:
+      - DATABASE_HOST=app-mysql
+      - DATABASE_USER=mysql
+      - DATABASE_PASSWORD=mysql
+      - DATABASE_NAME=dbTask
+      - DATABASE_PORT=3306
