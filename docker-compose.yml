@@ -26,3 +26,4 @@ services:
       - DATABASE_PASSWORD=mysql
       - DATABASE_NAME=dbTask
       - DATABASE_PORT=3306
+      - "SPRING_PROFILES_ACTIVE=docker"
